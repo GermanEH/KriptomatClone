@@ -76,8 +76,7 @@ function BottomTabNavigator() {
         tabBarStyle: {
           backgroundColor:'transparent',
           elevation:0
-        },
-        tabBarActiveBackgroundColor:'transparent',
+        }
       }}
       >
       <BottomTab.Screen
