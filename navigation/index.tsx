@@ -8,7 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+import { ColorSchemeName, ImageBackground, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -20,10 +20,20 @@ import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../typ
 import LinkingConfiguration from './LinkingConfiguration';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+
+  const navTheme= {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: "transparent"
+    }
+  }
+
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      // theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      theme={navTheme}>
       <RootNavigator />
     </NavigationContainer>
   );
@@ -57,11 +67,19 @@ function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 
   return (
+    
     <BottomTab.Navigator
       initialRouteName="TabOne"
+      sceneContainerStyle={{backgroundColor:'transparent'}}
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
-      }}>
+        tabBarStyle: {
+          backgroundColor:'transparent',
+          elevation:0
+        },
+        tabBarActiveBackgroundColor:'transparent',
+      }}
+      >
       <BottomTab.Screen
         name="TabOne"
         component={TabOneScreen}
@@ -81,7 +99,7 @@ function BottomTabNavigator() {
                 style={{ marginRight: 15 }}
               />
             </Pressable>
-          ),
+          )
         })}
       />
       <BottomTab.Screen
