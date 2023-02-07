@@ -1,6 +1,4 @@
 import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import { FlatList } from 'react-native';
@@ -40,13 +38,16 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Kriptomat!</Text>
+      <View style={styles.subTitleContainer}>
+        <Text style={styles.subTitle}>Kriptomat</Text>
+      </View>
+        <Text style={styles.title}>Welcome back</Text>
+        <Text style={styles.text}>Log in or create an account, and buy your first cryptocurrencies today!</Text>
       <FlatList
       data={data}
       renderItem={({item}) => <Coin name={item.name}/>} 
       keyExtractor={item => item.id} />
         <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-        {/* <EditScreenInfo path="/screens/TabOneScreen.tsx" /> */}
     </View>
   );
 }
@@ -57,9 +58,19 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // justifyContent: 'center',
   },
-  title: {
+  subTitle: {
     fontSize: 20,
+  },
+  subTitleContainer: {
+    margin: 30,
+  },
+  title: {
+    fontSize: 35,
     fontWeight: 'bold',
+    margin: 10,
+  },
+  text: {
+    margin: 10,
   },
   separator: {
     marginVertical: 30,
